@@ -1,0 +1,20 @@
+%h1 Show shop
+%h4= link_to 'Back to shops list', [:shops]
+%b Name:
+= @shop.name
+%h2 Books (#{link_to 'json', shop_path(params: params, format: 'json')}):
+%hr
+= form_tag [@shop], method: 'get' do  
+  %h4= params[:books].present? ? button_to('Reset filter', [@shop]) : submit_tag('Show only checked books')
+  - @books.each_with_index do |book, index|
+    %p
+      = check_box_tag "books[#{index}]", book.id unless params[:books].present?
+      Title:
+      %b= link_to book.title, [@shop, book]
+      Copies in stock:
+      = @shop.copies 'stock', book.id
+      Copies sold:
+      = @shop.copies 'sold', book.id
+      = link_to 'delete', [book], confirm: 'Sure delete book from shop?', method: :delete
+      %br
+        %small Publisher: #{link_to book.publisher.name, [book.publisher]}

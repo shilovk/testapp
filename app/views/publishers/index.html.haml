@@ -1,0 +1,10 @@
+%h1
+  List of publishers
+  | #{link_to 'List of shops', [:shops]}
+%h4= link_to 'Create new publisher', [:new, :publisher]
+%hr
+- @publishers.each do |publisher|
+  %p    
+    = link_to publisher.name, [publisher]
+    = link_to 'edit', [:edit, publisher]
+    = link_to 'delete', publisher_path(publisher), :confirm => 'Sure?', :method => :delete

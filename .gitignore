@@ -1,0 +1,33 @@
+# Игнорирование конфига bundler
+/.bundle
+
+# Игнорирование дефолтной базы данных SQLite.
+/db/*.sqlite3
+/db/*.sqlite3-journal
+
+# Игнорирование всех логов и временных файлов.
+/log
+/tmp
+
+/public/system
+/public/*.xls
+/public/*.zip
+/public/*.doc*
+/public/*.rtf*
+/public/assets
+/dump
+
+# Игнорирование прочих ненужных файлов.
+database.yml
+sftp-config.json
+.gitkeep
+doc/
+*.swp
+*.swo
+*.bak
+*~
+.sass-cache/
+#.project
+.DS_Store
+.idea
+.secret

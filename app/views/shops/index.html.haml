@@ -1,0 +1,21 @@
+%h1
+  = link_to 'Publishers list', [:publishers]
+  | Shops list #{('with books of publisher '+@publisher.name+' ('+link_to('json', shops_path(params: params, format: 'json'))+')').html_safe if @publisher.present?}
+%h4= link_to 'Create new shop', [:new, :shop]
+%hr
+- @shops.each do |shop|
+  - unless @publisher.present?
+    %b= link_to shop.name, [shop]
+    = link_to 'edit books of shop', [:edit, shop]
+    = link_to 'delete', [shop], :confirm => 'Sure?', :method => :delete
+  - else
+    %h3 id: #{shop[:id]}, name: #{shop[:name]}    
+    books sold count: #{shop[:books_sold_count]},
+    %br
+    books in stock:  
+    - shop[:books_in_stock].each do |book|
+      %br         
+      id: #{book[:id]},
+      title: #{book[:title]},
+      copies in stock: #{book[:copies_in_stock]}
+  %hr

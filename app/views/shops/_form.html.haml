@@ -1,0 +1,11 @@
+= form_for [@shop] do |f|
+  - @books.each_with_index do |book, index|
+    %p
+      Copies in stock:
+      = number_field_tag "stock[#{index}]", @shop.copies('stock', book.id)
+      Copies sold:
+      = number_field_tag "sold[#{index}]", @shop.copies('sold', book.id)
+      = check_box_tag "book[#{index}]", book.id, @shop.have_book?(book)
+      %b= book.title
+      %small Publisher: #{book.publisher.name}
+  = f.submit 'Save'

@@ -1,0 +1,13 @@
+%h1 Show publisher
+%h4= link_to 'Back to publishers list', [:publishers]
+%b Name:
+= @publisher.name
+%h4= link_to 'Shops with books of this publisher (Endpoint 1)', shops_path(publisher: @publisher)
+%h2 Books:
+%h5= link_to 'Add book', [:new, @publisher, :book]
+%hr
+- @books.each do |book|
+  %p
+    = link_to book.title, [@publisher, book]
+    = link_to 'edit', [:edit, @publisher, book]
+    = link_to 'delete', [book], confirm: 'Sure delete book?', method: :delete
